@@ -17,6 +17,11 @@
 - **Solution**: Updated `nixpacks.toml` with proper dependency phases
 - **Result**: Production and dev dependencies handled correctly
 
+### 4. Vite Import Error Fixed (CRITICAL)
+- **Problem**: `Cannot find package 'vite'` in production build
+- **Solution**: Added vite and related plugins to external dependencies in esbuild
+- **Result**: Production build no longer tries to import vite at runtime
+
 ## 📋 Current Configuration
 
 ### Railway.json
@@ -42,8 +47,13 @@
 1. Install production dependencies
 2. Install dev dependencies for build
 3. Run Vite build (frontend)
-4. Run esbuild (backend)
+4. Run esbuild (backend) with external vite dependencies
 5. Start with `npm start`
+
+### Fixed Build Command
+```bash
+npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist --external:vite --external:@vitejs/plugin-react --external:@replit/vite-plugin-runtime-error-modal --external:@replit/vite-plugin-cartographer
+```
 
 ## 🔧 Deployment Steps
 

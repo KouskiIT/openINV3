@@ -9,7 +9,8 @@ cmds = ["npm ci --only=production"]
 dependsOn = ["install"]
 cmds = [
   "npm install --include=dev",
-  "npm run build"
+  "npx vite build",
+  "npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist --external:vite --external:@vitejs/plugin-react --external:@replit/vite-plugin-runtime-error-modal --external:@replit/vite-plugin-cartographer --external:../vite.config --external:./vite --external:nanoid"
 ]
 
 [start]

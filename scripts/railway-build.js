@@ -22,9 +22,9 @@ try {
   console.log('   Building frontend with Vite...');
   execSync('npx vite build', { stdio: 'inherit' });
   
-  // Build backend
+  // Build backend with proper externals to avoid vite import issues
   console.log('   Building backend with esbuild...');
-  execSync('npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist', { stdio: 'inherit' });
+  execSync('npx esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist --external:vite --external:@vitejs/plugin-react --external:@replit/vite-plugin-runtime-error-modal --external:@replit/vite-plugin-cartographer', { stdio: 'inherit' });
   
   console.log('✅ Build completed successfully!');
   
