@@ -33,10 +33,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Health check endpoint for deployment monitoring
   app.get("/api/health", (req, res) => {
+    // Simple health check - just confirm server is running
     res.status(200).json({ 
       status: "ok", 
       timestamp: new Date().toISOString(),
-      environment: process.env.NODE_ENV || "development"
+      environment: process.env.NODE_ENV || "development",
+      version: "1.0.0"
     });
   });
 

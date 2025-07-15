@@ -1,12 +1,16 @@
 [phases.setup]
-nixPkgs = ["nodejs-18_x"]
-aptPkgs = ["postgresql-client"]
+nixPkgs = ["nodejs-18_x", "postgresql"]
 
 [phases.install]
-cmds = ["npm ci"]
+dependsOn = ["setup"]
+cmds = ["npm ci --only=production"]
 
 [phases.build]
-cmds = ["npm run build"]
+dependsOn = ["install"]
+cmds = [
+  "npm install --include=dev",
+  "npm run build"
+]
 
 [start]
 cmd = "npm start"
